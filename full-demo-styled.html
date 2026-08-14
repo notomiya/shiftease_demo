@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ShiftEase Full Demo</title>
+<style>
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#f5f8f6}
+#app{position:fixed;inset:0;width:100%;height:100%;border:0;background:#f5f8f6}
+</style>
+</head>
+<body>
+<iframe id="app" src="/full-demo-base" title="ShiftEase Full Demo"></iframe>
+<script>
+const frame=document.getElementById('app');
+frame.addEventListener('load',()=>{
+  const d=frame.contentDocument;
+  if(!d)return;
+  const css=`
+  /* ① next shift card -> quick cards spacing */
+  @media(max-width:700px){
+    #emp .hero{margin-bottom:30px!important;box-shadow:0 10px 24px rgba(22,132,91,.14)}
+    #emp .page.active>.grid:first-child{margin-top:4px}
+
+    /* ② employee bottom quick navigation */
+    #emp>.nav{
+      padding:10px 10px calc(10px + env(safe-area-inset-bottom))!important;
+      gap:8px!important;
+      background:rgba(255,255,255,.97)!important;
+      border-top:1px solid #d9e5df!important;
+      box-shadow:0 -8px 24px rgba(23,60,44,.12)!important;
+      backdrop-filter:blur(12px);
+    }
+    #emp>.nav button{
+      min-height:72px!important;
+      border-radius:16px!important;
+      border:1px solid #dfe9e4!important;
+      background:#fff!important;
+      color:#177b58!important;
+      padding:8px 3px!important;
+      font-size:12px!important;
+      line-height:1.15!important;
+      box-shadow:0 3px 10px rgba(23,60,44,.08)!important;
+      transition:.15s ease;
+    }
+    #emp>.nav button.active{
+      background:#16845b!important;
+      color:#fff!important;
+      border-color:#16845b!important;
+      transform:translateY(-2px);
+      box-shadow:0 7px 16px rgba(22,132,91,.25)!important;
+    }
+    #emp>.nav .navIcon{display:block;font-size:27px;line-height:30px;margin-bottom:4px;font-weight:900}
+    #emp>.nav .navLabel{display:block;font-size:12px;font-weight:900;letter-spacing:.01em}
+
+    /* employee home quick cards: stronger but restrained */
+    #eh>.grid .quick{min-height:126px!important;padding:17px!important;box-shadow:0 5px 15px rgba(23,60,44,.07);border-color:#dfe8e3!important}
+    #eh>.grid .quick .quickIcon{display:block;font-size:31px;margin-bottom:8px;line-height:1}
+    #eh>.grid .quick b{font-size:16px;color:#177b58}
+    #eh>.grid .quick:nth-child(2) b{color:#2478c7}
+    #eh>.grid .quick:nth-child(4) b{color:#b66a00}
+
+    /* ③ admin top quick access */
+    #admin .adminnav{
+      gap:10px!important;
+      margin:8px 0 26px!important;
+    }
+    #admin .adminnav button{
+      min-height:96px!important;
+      border:1px solid #dfe8e3!important;
+      background:#fff!important;
+      border-radius:18px!important;
+      padding:13px 10px!important;
+      color:#17211c!important;
+      font-size:14px!important;
+      font-weight:900!important;
+      box-shadow:0 5px 15px rgba(23,60,44,.08)!important;
+    }
+    #admin .adminnav button:nth-child(1){background:#16845b!important;color:#fff!important;border-color:#16845b!important}
+    #admin .adminnav button:nth-child(2){background:#2478c7!important;color:#fff!important;border-color:#2478c7!important}
+    #admin .adminnav button:nth-child(5){grid-column:1/-1;min-height:78px!important}
+    #admin .adminnav .adminIcon{display:block;font-size:29px;line-height:32px;margin-bottom:6px}
+    #admin .adminnav .adminLabel{display:block;font-weight:900}
+  }
+  `;
+  const style=d.createElement('style');style.textContent=css;d.head.appendChild(style);
+
+  const empNav=d.querySelector('#emp>.nav');
+  if(empNav){
+    const icons=['⌂','＋','▦','↻'];
+    const labels=['ホーム','希望提出','シフト','交代'];
+    [...empNav.querySelectorAll('button')].forEach((b,i)=>{
+      b.innerHTML=`<span class="navIcon">${icons[i]||''}</span><span class="navLabel">${labels[i]||b.textContent.trim()}</span>`;
+      if(i===0)b.classList.add('active');
+      b.addEventListener('click',()=>{empNav.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active')});
+    });
+  }
+
+  const quicks=d.querySelectorAll('#eh>.grid .quick');
+  const qicons=['🗓️','👥','🔄','☎️'];
+  quicks.forEach((b,i)=>{
+    const bold=b.querySelector('b');
+    if(bold && !b.querySelector('.quickIcon')){
+      const s=d.createElement('span');s.className='quickIcon';s.textContent=qicons[i]||'•';
+      [...b.childNodes].filter(n=>n.nodeType===3).forEach(n=>n.remove());
+      b.insertBefore(s,b.firstChild);
+    }
+  });
+
+  const adminNav=d.querySelector('#admin .adminnav');
+  if(adminNav){
+    const icons=['▥','▣','✓','👥','●'];
+    const labels=['ダッシュボード','シフト作成','希望提出状況','従業員管理','お知らせ'];
+    [...adminNav.querySelectorAll('button')].forEach((b,i)=>{
+      b.innerHTML=`<span class="adminIcon">${icons[i]||''}</span><span class="adminLabel">${labels[i]||b.textContent.trim()}</span>`;
+    });
+  }
+});
+</script>
+</body>
+</html>
