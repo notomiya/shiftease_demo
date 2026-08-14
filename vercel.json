@@ -4,10 +4,14 @@
     {"src": "backend/app.py", "use": "@vercel/python"},
     {"src": "full-demo.html", "use": "@vercel/static"},
     {"src": "full-demo-styled-v2.html", "use": "@vercel/static"},
-    {"src": "full-demo-icons-v3.html", "use": "@vercel/static"}
+    {"src": "full-demo-icons-v3.html", "use": "@vercel/static"},
+    {"src": "full-demo-realistic.html", "use": "@vercel/static"},
+    {"src": "demo-realistic.css", "use": "@vercel/static"},
+    {"src": "demo-realistic.js", "use": "@vercel/static"}
   ],
   "routes": [
-    {"src": "/full-demo", "dest": "/full-demo-icons-v3.html"},
+    {"src": "/full-demo", "dest": "/full-demo-realistic.html"},
+    {"src": "/full-demo-v3", "dest": "/full-demo-icons-v3.html"},
     {"src": "/full-demo-v2", "dest": "/full-demo-styled-v2.html"},
     {"src": "/full-demo-base", "dest": "/full-demo.html"},
     {"src": "/(.*)", "dest": "backend/app.py"}
