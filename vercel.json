@@ -11,6 +11,8 @@
   ],
   "routes": [
     {"src": "/full-demo", "dest": "/full-demo-realistic.html"},
+    {"src": "/demo-realistic.css", "dest": "/demo-realistic.css"},
+    {"src": "/demo-realistic.js", "dest": "/demo-realistic.js"},
     {"src": "/full-demo-v3", "dest": "/full-demo-icons-v3.html"},
     {"src": "/full-demo-v2", "dest": "/full-demo-styled-v2.html"},
     {"src": "/full-demo-base", "dest": "/full-demo.html"},
