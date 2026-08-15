@@ -7,12 +7,16 @@
     {"src": "full-demo-icons-v3.html", "use": "@vercel/static"},
     {"src": "full-demo-realistic.html", "use": "@vercel/static"},
     {"src": "demo-realistic.css", "use": "@vercel/static"},
-    {"src": "demo-realistic.js", "use": "@vercel/static"}
+    {"src": "demo-realistic.js", "use": "@vercel/static"},
+    {"src": "demo-extensions.css", "use": "@vercel/static"},
+    {"src": "demo-extensions.js", "use": "@vercel/static"}
   ],
   "routes": [
     {"src": "/full-demo", "dest": "/full-demo-realistic.html"},
     {"src": "/demo-realistic.css", "dest": "/demo-realistic.css"},
     {"src": "/demo-realistic.js", "dest": "/demo-realistic.js"},
+    {"src": "/demo-extensions.css", "dest": "/demo-extensions.css"},
+    {"src": "/demo-extensions.js", "dest": "/demo-extensions.js"},
     {"src": "/full-demo-v3", "dest": "/full-demo-icons-v3.html"},
     {"src": "/full-demo-v2", "dest": "/full-demo-styled-v2.html"},
     {"src": "/full-demo-base", "dest": "/full-demo.html"},
